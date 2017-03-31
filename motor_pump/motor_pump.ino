@@ -1,34 +1,55 @@
+#include <Average.h>
+
+// Reserve space for 10 entries in the average bucket.
+// Change the type between < and > to change the entire way the library works.
+Average<int> moistoure(12);
+
 const int switchPin =2;
-const int motorPin =9;
+const int motorPin =10;
 int switchstate = 0;
-const int Input = 12;
-int moistoure = 0;
+const int Input = A5;
+//float moistoure[]{0,0,0,0,0,0,0,0,0,0,0,0};
 //int ByteRecieved;
+int death =0;
+int average =  0;
+
+
+
 
 void setup() {
   pinMode(motorPin, OUTPUT);
   pinMode(switchPin, INPUT);
   pinMode (Input, INPUT);
-//  Serial.begin(9600);
-//  Serial.println(digitalRead(Input));
+  Serial.begin(9600);
+  Serial.println(analogRead(Input));
+  
 } 
 
 void loop(){
-moistoure = digitalRead(Input);
+  moistoure.push(analogRead(Input));
 switchstate = digitalRead(switchPin);
- 
-  if (moistoure >85) {
+average = moistoure.mean();
+ delay(1000);
+ //Serial.println(switchstate);
+ death++;
+ if (death >11){
+   death = 0;
+ }
+  if (switchstate == HIGH | average < 200) {
     digitalWrite(motorPin, HIGH);
+
   }
   else{
     digitalWrite(motorPin,LOW);
+  
   }
 
-  
-//  if(Serial.available()>0){
+  if(death==11){
     //ByteRecieved = Serial.read();
-//    Serial.println(moistoure);
-//  }
+    Serial.write('Average:::');
+    Serial.println(average);
+    
+  }
  
 }
 
