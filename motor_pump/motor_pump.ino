@@ -2,6 +2,7 @@
 
 // Reserve space for 10 entries in the average bucket.
 // Change the type between < and > to change the entire way the library works.
+
 Average<int> moistoure(12);
 
 const int switchPin =2;
@@ -29,7 +30,7 @@ void loop(){
   moistoure.push(analogRead(Input));
 switchstate = digitalRead(switchPin);
 average = moistoure.mean();
- delay(1000);
+ delay(83);
  //Serial.println(switchstate);
  death++;
  if (death >11){
@@ -46,7 +47,7 @@ average = moistoure.mean();
 
   if(death==11){
     //ByteRecieved = Serial.read();
-    Serial.write('Average:::');
+    //Serial.write('Average:::');
     Serial.println(average);
     
   }
