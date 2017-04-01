@@ -36,7 +36,7 @@ average = moistoure.mean();
  if (death >11){
    death = 0;
  }
-  if (switchstate == HIGH | average < 200) {
+  if (switchstate == HIGH | average < 642 {
     digitalWrite(motorPin, HIGH);
 
   }
@@ -53,4 +53,5 @@ average = moistoure.mean();
   }
  
 }
+
 
